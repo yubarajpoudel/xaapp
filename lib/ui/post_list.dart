@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:myapp/modal/post.dart';
 import 'package:myapp/network/enums.dart';
 import 'package:provider/provider.dart';
@@ -52,8 +51,8 @@ class PostList extends StatelessWidget {
                           labelText: 'Message',
                           hintText: 'Add message'),
                     ),
-                    SizedBox(height: 16.0,),
-                    Container(
+                    const SizedBox(height: 16.0,),
+                    SizedBox(
                       width: MediaQuery.of(context).size.width*0.8,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
