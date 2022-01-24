@@ -8,12 +8,11 @@ part 'post.g.dart';
 
 @JsonSerializable()
 class Post extends ChangeNotifier {
-  String? id;
+  String? userId;
+  int? id;
   String? title;
-  String? desc;
-  String? image;
-  String? createdAt;
-  List<Comment>? comments;
+  String? body;
+
   @JsonKey(ignore: true)
   List<Post>? postList;
   @JsonKey(ignore: true)
@@ -22,7 +21,8 @@ class Post extends ChangeNotifier {
   ConnectionStatus? connectionStatus;
   Post();
 
-  Post.init({this.id, this.title, this.desc, this.image, this.createdAt, this.comments});
+
+  Post.init(this.userId, this.id, this.title, this.body);
 
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
 
@@ -32,9 +32,9 @@ class Post extends ChangeNotifier {
     notifyListeners();
   }
 
-  syncFromNetwork(Map<String, String> filterParams) {
+  syncFromNetwork() {
     updateState(ConnectionStatus.LOADING);
-    APIConsumer.getPostList(filterParams).then((List<Post>? mPostList) {
+    APIConsumer.getPostList().then((List<Post>? mPostList) {
       connectionStatus = ConnectionStatus.DONE;
       if(mPostList != null) {
         postList = mPostList;

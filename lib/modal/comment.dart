@@ -4,11 +4,14 @@ part 'comment.g.dart';
 
 @JsonSerializable()
 class Comment extends ChangeNotifier {
-  String? userComment;
-  String? createdAt;
-  String? userName;
+  String? postId;
+  int? id;
+  String? name;
+  String? email;
+  String? body;
   Comment();
-  Comment.init({this.userComment, this.createdAt, this.userName});
+
+  Comment.init(this.postId, this.id, this.name, this.email, this.body);
 
   factory Comment.fromJson(Map<String, dynamic> json) => _$CommentFromJson(json);
 

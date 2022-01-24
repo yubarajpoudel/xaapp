@@ -8,7 +8,7 @@ import 'package:myapp/network/api.dart';
 
 class APIConsumer {
 
-  static Future<List<Post>?> getPostList(Map<String, String> filterParam) {
+  static Future<List<Post>?> getPostList() {
     return http.get(EndPoint.POST.url).then(
         (response) {
       if (response.statusCode == 200) {
