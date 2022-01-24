@@ -16,11 +16,8 @@ class MyApp extends StatelessWidget {
       title: 'XA App',
       debugShowCheckedModeBanner: false,
       initialRoute: "/",
-      routes: {
-        "/": (context) => PostList()
-      },
       onGenerateRoute: (settings) {
-        if (settings.name == "/${PostDetail.TAG}") {
+        if (settings.name == "/") {
           return MaterialPageRoute(
             builder: (context) {
               return MultiProvider(

@@ -1,14 +1,13 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:myapp/modal/comment.dart';
 import 'package:myapp/network/api_consumer.dart';
 import 'package:myapp/network/enums.dart';
 part 'post.g.dart';
 
 @JsonSerializable()
 class Post extends ChangeNotifier {
-  String? userId;
+  int? userId;
   int? id;
   String? title;
   String? body;
@@ -28,7 +27,7 @@ class Post extends ChangeNotifier {
 
   Map<String, dynamic> toJson() => _$PostToJson(this);
   updateState(ConnectionStatus connectionState) {
-    this.connectionStatus = connectionState;
+    connectionStatus = connectionState;
     notifyListeners();
   }
 

@@ -7,12 +7,14 @@ import 'package:myapp/modal/post.dart';
 import 'package:myapp/network/api.dart';
 
 class APIConsumer {
+  static const String TAG = "APIConsumer";
 
   static Future<List<Post>?> getPostList() {
+    print("$TAG , endpoint = ${EndPoint.POST.url}");
     return http.get(EndPoint.POST.url).then(
         (response) {
       if (response.statusCode == 200) {
-        List<Post>? postList =(jsonDecode(response.body) as List<Post>?)
+        List<Post>? postList =(jsonDecode(response.body) as List<dynamic>?)
             ?.map((e) => Post.fromJson(e as Map<String, dynamic>))
             .toList();
         return postList;
