@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:myapp/modal/post.dart';
 import 'package:myapp/network/api_consumer.dart';
 import 'package:myapp/network/enums.dart';
@@ -13,6 +14,7 @@ class PostList extends StatelessWidget {
   var postBodyController = TextEditingController();
 
   static const String TAG = "PostList";
+
   PostList({Key? key}) : super(key: key);
 
   _postItemView(Post post) {
@@ -24,64 +26,81 @@ class PostList extends StatelessWidget {
         isScrollControlled: true,
         context: context,
         builder: (context) {
-          return  SingleChildScrollView(
+          return SingleChildScrollView(
               child: GestureDetector(
                   child: Padding(
-                  padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom
-          ),
-          child: Form(
-            key: formKey,
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.5,
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    TextFormField(
-                      controller: postTitleAddController,
-                      validator: (value) => value != null && value.isEmpty ? "* Required": null,
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Title',
-                          hintText: 'Add post title'),
-                    ),
-                    const SizedBox(height: 8.0,),
-                    TextFormField(
-                      controller: postBodyController,
-                      maxLines: 4,
-                      validator: (value) => value != null && value.isEmpty ? "* Required": null,
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Message',
-                          hintText: 'Add message'),
-                    ),
-                    const SizedBox(height: 16.0,),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width*0.8,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.green, // background
-                          onPrimary: Colors.white, // foreground
+                      padding: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).viewInsets.bottom),
+                      child: Form(
+                        key: formKey,
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 0.5,
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              TextFormField(
+                                controller: postTitleAddController,
+                                validator: (value) =>
+                                    value != null && value.isEmpty
+                                        ? "* Required"
+                                        : null,
+                                decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: 'Title',
+                                    hintText: 'Add post title'),
+                              ),
+                              const SizedBox(
+                                height: 8.0,
+                              ),
+                              TextFormField(
+                                controller: postBodyController,
+                                maxLines: 4,
+                                validator: (value) =>
+                                    value != null && value.isEmpty
+                                        ? "* Required"
+                                        : null,
+                                decoration: const InputDecoration(
+                                    border: OutlineInputBorder(),
+                                    labelText: 'Message',
+                                    hintText: 'Add message'),
+                              ),
+                              const SizedBox(
+                                height: 16.0,
+                              ),
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.8,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.green, // background
+                                    onPrimary: Colors.white, // foreground
+                                  ),
+                                  onPressed: () {
+                                    if (formKey.currentState!.validate()) {
+                                      Map<String, Object> postParams =
+                                          new Map();
+                                      postParams["title"] =
+                                          postTitleAddController.text;
+                                      postParams["body"] =
+                                          postBodyController.text;
+                                      postParams["userId"] = 1;
+                                      APIConsumer.addPost(postParams).then(
+                                          (newPost) {
+                                        Utils.toast(
+                                            "new Post added successfully");
+                                      },
+                                          onError: (err) => Utils.toast(
+                                              err.toString(),
+                                              color: Colors.red));
+                                    }
+                                  },
+                                  child: Text('Add Post'),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                        onPressed: () {
-                          if(formKey.currentState!.validate()) {
-                            Map<String, String> postParams = new Map();
-                            postParams["title"] = postTitleAddController.text;
-                            postParams["body"] = postBodyController.text;
-                            postParams["userId"] = "1";
-                            APIConsumer.addPost(postParams).then((value) => {
-                              Log.d("$TAG, addPost:: $value")
-                            });
-                          }
-                        },
-                        child: Text('Add Post'),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-          ))));
+                      ))));
         });
   }
 
@@ -90,7 +109,10 @@ class PostList extends StatelessWidget {
     postNotifier = Provider.of<Post>(context, listen: false);
     postNotifier!.getAllPost();
     return Scaffold(
-      appBar: AppBar(title: const Text("PostList"), centerTitle: true,),
+      appBar: AppBar(
+        title: const Text("PostList"),
+        centerTitle: true,
+      ),
       body: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
@@ -114,9 +136,13 @@ class PostList extends StatelessWidget {
               }
             },
           )),
-      floatingActionButton: FloatingActionButton.extended(onPressed: (){
-        _addPostPage(context);
-      }, label: Text("New Post"), icon: Icon(Icons.add),),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          _addPostPage(context);
+        },
+        label: Text("New Post"),
+        icon: Icon(Icons.add),
+      ),
     );
   }
 }

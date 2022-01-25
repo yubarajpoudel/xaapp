@@ -27,12 +27,12 @@ class APIConsumer {
     }, onError: (error) => Future.error(ErrorDescription(error.toString())));
   }
 
-  static Future<String> addPost(Map<String, String> params) {
-    return http.post(EndPoint.POST.url, body: params, headers: {'Content-type': 'application/json; charset=UTF-8'}).then(
+  static Future<Post> addPost(Map<String, Object> params) {
+    return http.post(EndPoint.POST.url, body: jsonEncode(params), headers: {'Content-type': 'application/json; charset=UTF-8'}).then(
             (response) {
               Log.d("$TAG, addPost:: ${response.statusCode}");
           if (response.statusCode == 201) {
-             return response.body;
+             return Post.fromJson(jsonDecode(response.body));
           } else {
             return Future.error(ErrorDescription("Unknown error"));
           }
