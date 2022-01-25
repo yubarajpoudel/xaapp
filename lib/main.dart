@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/modal/comment.dart';
 import 'package:myapp/ui/post_detail.dart';
 import 'package:myapp/ui/post_list.dart';
 import 'package:provider/provider.dart';
@@ -20,11 +21,21 @@ class MyApp extends StatelessWidget {
         if (settings.name == "/") {
           return MaterialPageRoute(
             builder: (context) {
-              return MultiProvider(
-                child: PostList(),
-                  providers: [
-                    ChangeNotifierProvider(create: (context) => Post(),)
-                  ]);
+              return MultiProvider(child: PostList(), providers: [
+                ChangeNotifierProvider(
+                  create: (context) => Post(),
+                )
+              ]);
+            },
+          );
+        } else if (settings.name == "/${PostDetail.TAG}") {
+          return MaterialPageRoute(
+            builder: (context) {
+              return MultiProvider(child: PostDetail(post: settings.arguments as Post,), providers: [
+                ChangeNotifierProvider(
+                  create: (context) => Comment(),
+                )
+              ]);
             },
           );
         }

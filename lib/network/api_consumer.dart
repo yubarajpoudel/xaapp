@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:myapp/modal/comment.dart';
 import 'package:myapp/modal/post.dart';
 import 'package:myapp/network/api.dart';
 
@@ -38,4 +39,22 @@ class APIConsumer {
           }
         }, onError: (error) => Future.error(ErrorDescription(error.toString())));
   }
+
+  static Future<List<Comment>?> getCommentList(String postId) {
+    Uri url = EndPoint.COMMENT.url.replace(queryParameters: {'postId': postId});
+    Log.d("$TAG , endpoint = $url");
+    return http.get(url).then(
+            (response) {
+          if (response.statusCode == 200) {
+            List<Comment>? commentList =(jsonDecode(response.body) as List<dynamic>?)
+                ?.map((e) => Comment.fromJson(e as Map<String, dynamic>))
+                .toList();
+            return commentList;
+
+          } else {
+            return Future.error(ErrorDescription("Unknown error"));
+          }
+        }, onError: (error) => Future.error(ErrorDescription(error.toString())));
+  }
+
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:myapp/modal/post.dart';
 import 'package:myapp/network/api_consumer.dart';
 import 'package:myapp/network/enums.dart';
+import 'package:myapp/ui/post_detail.dart';
 import 'package:provider/provider.dart';
 
 import '../utils.dart';
@@ -17,8 +17,11 @@ class PostList extends StatelessWidget {
 
   PostList({Key? key}) : super(key: key);
 
-  _postItemView(Post post) {
-    return ListTile(title: Text(post.title!), subtitle: Text(post.body!));
+  _postItemView(BuildContext context, Post post) {
+    return ListTile(
+      onTap: () => Navigator.pushNamed(context, "/${PostDetail.TAG}", arguments: post),
+        selectedTileColor: Colors.lightBlue,
+        title: Text(post.title!), subtitle: Text(post.body!, maxLines: 2,));
   }
 
   _addPostPage(BuildContext context) {
@@ -131,7 +134,7 @@ class PostList extends StatelessWidget {
               } else {
                 return ListView.builder(itemBuilder: (context, pos) {
                   List<Post> postList = post.postList!;
-                  return _postItemView(postList[pos]);
+                  return _postItemView(context, postList[pos]);
                 });
               }
             },
