@@ -19,9 +19,14 @@ class PostList extends StatelessWidget {
 
   _postItemView(BuildContext context, Post post) {
     return ListTile(
-      onTap: () => Navigator.pushNamed(context, "/${PostDetail.TAG}", arguments: post),
+        onTap: () =>
+            Navigator.pushNamed(context, "/${PostDetail.TAG}", arguments: post),
         selectedTileColor: Colors.lightBlue,
-        title: Text(post.title!), subtitle: Text(post.body!, maxLines: 2,));
+        title: Text(post.title!),
+        subtitle: Text(
+          post.body!,
+          maxLines: 2,
+        ));
   }
 
   _addPostPage(BuildContext context) {
@@ -80,8 +85,7 @@ class PostList extends StatelessWidget {
                                   ),
                                   onPressed: () {
                                     if (formKey.currentState!.validate()) {
-                                      Map<String, Object> postParams =
-                                          new Map();
+                                      Map<String, Object> postParams = {};
                                       postParams["title"] =
                                           postTitleAddController.text;
                                       postParams["body"] =
@@ -97,7 +101,7 @@ class PostList extends StatelessWidget {
                                               color: Colors.red));
                                     }
                                   },
-                                  child: Text('Add Post'),
+                                  child: const Text('Add Post'),
                                 ),
                               )
                             ],

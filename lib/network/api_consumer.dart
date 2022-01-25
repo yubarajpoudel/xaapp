@@ -57,4 +57,18 @@ class APIConsumer {
         }, onError: (error) => Future.error(ErrorDescription(error.toString())));
   }
 
+  static Future<Comment> addComment(String postId, Map<String, Object> params) {
+    Uri url = EndPoint.COMMENT.url.replace(queryParameters: {'postId': postId});
+    return http.post(url, body: jsonEncode(params), headers: {'Content-type': 'application/json; charset=UTF-8'}).then(
+            (response) {
+          Log.d("$TAG, addComment:: ${response.statusCode}");
+          if (response.statusCode == 201) {
+            return Comment.fromJson(jsonDecode(response.body));
+          } else {
+            return Future.error(ErrorDescription("Unknown error"));
+          }
+        }, onError: (error) => Future.error(ErrorDescription(error.toString())));
+  }
+
+
 }

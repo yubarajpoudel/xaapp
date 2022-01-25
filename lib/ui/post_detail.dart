@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/modal/comment.dart';
 import 'package:myapp/modal/post.dart';
+import 'package:myapp/network/api_consumer.dart';
 import 'package:myapp/network/enums.dart';
+import 'package:myapp/utils.dart';
 import 'package:provider/provider.dart';
 
 class PostDetail extends StatelessWidget {
@@ -9,6 +11,7 @@ class PostDetail extends StatelessWidget {
   Post? post;
   Comment? commentNotifier;
   var commentController = TextEditingController();
+  var formKey = GlobalKey<FormState>();
 
   PostDetail({Key? key, this.post}) : super(key: key);
 
@@ -30,27 +33,40 @@ class PostDetail extends StatelessWidget {
   }
 
   _addComment() {
-    return Card(
-        color: Colors.white,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
-        child: Row(
-          children: [
-            Expanded(
-                child: TextFormField(
+    return Container(
+      color: Colors.white,
+      child: Row(
+        children: [
+          Expanded(
+              child: Form(
+            key: formKey,
+            child: TextFormField(
               controller: commentController,
               validator: (value) =>
                   value != null && value.isEmpty ? "* Required" : null,
-              decoration: const InputDecoration(
-                  border: OutlineInputBorder(), hintText: 'comments here'),
-            )),
-            IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.send,
-                ))
-          ],
-        ));
+              decoration: const InputDecoration(hintText: 'comments here'),
+            ),
+          )),
+          IconButton(
+              onPressed: () {
+                if (formKey.currentState!.validate()) {
+                  Map<String, Object> postParams = {};
+                  postParams["title"] = commentController.text;
+                  postParams["body"] = commentController.text;
+                  postParams["userId"] = 1;
+                  APIConsumer.addPost(postParams).then((newComment) {
+                    Utils.toast("new Post added successfully");
+                  },
+                      onError: (err) =>
+                          Utils.toast(err.toString(), color: Colors.red));
+                }
+              },
+              icon: const Icon(
+                Icons.send,
+              ))
+        ],
+      ),
+    );
   }
 
   @override
