@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+
 
 class Log {
   static d(String message, {String? tag}) {
@@ -21,5 +23,10 @@ class Utils {
         textColor: Colors.white,
         fontSize: 16.0
     );
+  }
+
+  static Future<bool?> isInternetConnected() async {
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    return connectivityResult == ConnectivityResult.mobile || connectivityResult == ConnectivityResult.wifi;
   }
 }

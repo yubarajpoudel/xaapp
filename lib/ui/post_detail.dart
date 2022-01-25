@@ -50,12 +50,16 @@ class PostDetail extends StatelessWidget {
           IconButton(
               onPressed: () {
                 if (formKey.currentState!.validate()) {
-                  Map<String, Object> postParams = {};
-                  postParams["title"] = commentController.text;
-                  postParams["body"] = commentController.text;
-                  postParams["userId"] = 1;
-                  APIConsumer.addPost(postParams).then((newComment) {
-                    Utils.toast("new Post added successfully");
+                  Map<String, Object> commentParams = {};
+                  commentParams["postId"] = post!.id!;
+                  commentParams["body"] = commentController.text;
+                  commentParams["name"] = "Yubaraj Poudel";
+                  commentParams["email"] = "yubarajpoudel708@gmail.com";
+
+                  APIConsumer.addComment(commentParams).then((newComment) {
+                    Utils.toast("New comment added successfully");
+                    FocusManager.instance.primaryFocus?.unfocus();
+                    commentController.text = "";
                   },
                       onError: (err) =>
                           Utils.toast(err.toString(), color: Colors.red));

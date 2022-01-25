@@ -95,6 +95,10 @@ class PostList extends StatelessWidget {
                                           (newPost) {
                                         Utils.toast(
                                             "new Post added successfully");
+                                        FocusManager.instance.primaryFocus
+                                            ?.unfocus();
+                                        postTitleAddController.text = "";
+                                        postBodyController.text = "";
                                       },
                                           onError: (err) => Utils.toast(
                                               err.toString(),
@@ -147,8 +151,8 @@ class PostList extends StatelessWidget {
         onPressed: () {
           _addPostPage(context);
         },
-        label: Text("New Post"),
-        icon: Icon(Icons.add),
+        label: const Text("New Post"),
+        icon: const Icon(Icons.add),
       ),
     );
   }

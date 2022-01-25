@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:myapp/network/api_consumer.dart';
 import 'package:myapp/network/enums.dart';
+
 part 'comment.g.dart';
 
 @JsonSerializable()
@@ -23,7 +24,8 @@ class Comment extends ChangeNotifier {
 
   Comment.init(this.postId, this.id, this.name, this.email, this.body);
 
-  factory Comment.fromJson(Map<String, dynamic> json) => _$CommentFromJson(json);
+  factory Comment.fromJson(Map<String, dynamic> json) =>
+      _$CommentFromJson(json);
 
   Map<String, dynamic> toJson() => _$CommentToJson(this);
 
@@ -32,12 +34,18 @@ class Comment extends ChangeNotifier {
     notifyListeners();
   }
 
+  addItemAtTop(Comment newComment) {
+    if (commentList != null) {
+      commentList!.insert(0, newComment);
+      notifyListeners();
+    }
+  }
 
   getAllComment(String postId) {
     updateState(ConnectionStatus.LOADING);
     APIConsumer.getCommentList(postId).then((List<Comment>? mCommentList) {
       connectionStatus = ConnectionStatus.DONE;
-      if(mCommentList != null) {
+      if (mCommentList != null) {
         commentList = mCommentList;
       } else {
         errorMessage = "Error in getting commentList";
@@ -49,6 +57,4 @@ class Comment extends ChangeNotifier {
       notifyListeners();
     });
   }
-
-
 }
