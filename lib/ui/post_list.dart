@@ -18,15 +18,22 @@ class PostList extends StatelessWidget {
   PostList({Key? key}) : super(key: key);
 
   _postItemView(BuildContext context, Post post) {
-    return ListTile(
-        onTap: () =>
-            Navigator.pushNamed(context, "/${PostDetail.TAG}", arguments: post),
-        selectedTileColor: Colors.lightBlue,
-        title: Text(post.title!),
-        subtitle: Text(
-          post.body!,
-          maxLines: 2,
-        ));
+    return Card(
+      color: Colors.white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+      child: ListTile(
+          onTap: () => Navigator.pushNamed(context, "/${PostDetail.TAG}",
+              arguments: post),
+          selectedTileColor: Colors.lightBlue,
+          title: Text(
+            post.title!,
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          subtitle: Text(
+            post.body!,
+            maxLines: 2,
+          )),
+    );
   }
 
   _addPostPage(BuildContext context) {
