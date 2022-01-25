@@ -43,7 +43,12 @@ class PostList extends StatelessWidget {
         builder: (context) {
           return SingleChildScrollView(
               child: GestureDetector(
-                  child: Padding(
+                  child: Container(
+                      margin: const EdgeInsets.only(left: 8.0, right: 8.0),
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(16.0),
+                              topRight: Radius.circular(16.0))),
                       padding: EdgeInsets.only(
                           bottom: MediaQuery.of(context).viewInsets.bottom),
                       child: Form(
