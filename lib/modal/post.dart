@@ -1,4 +1,6 @@
 
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:myapp/network/api_consumer.dart';
@@ -31,7 +33,7 @@ class Post extends ChangeNotifier {
     notifyListeners();
   }
 
-  syncFromNetwork() {
+  getAllPost() {
     updateState(ConnectionStatus.LOADING);
     APIConsumer.getPostList().then((List<Post>? mPostList) {
       connectionStatus = ConnectionStatus.DONE;
@@ -47,4 +49,5 @@ class Post extends ChangeNotifier {
       notifyListeners();
     });
   }
+
 }

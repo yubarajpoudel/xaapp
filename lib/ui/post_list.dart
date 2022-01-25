@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/modal/post.dart';
+import 'package:myapp/network/api_consumer.dart';
 import 'package:myapp/network/enums.dart';
 import 'package:provider/provider.dart';
+
+import '../utils.dart';
 
 class PostList extends StatelessWidget {
   Post? postNotifier;
@@ -36,6 +39,7 @@ class PostList extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     TextFormField(
+                      controller: postTitleAddController,
                       validator: (value) => value != null && value.isEmpty ? "* Required": null,
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(),
@@ -44,6 +48,7 @@ class PostList extends StatelessWidget {
                     ),
                     const SizedBox(height: 8.0,),
                     TextFormField(
+                      controller: postBodyController,
                       maxLines: 4,
                       validator: (value) => value != null && value.isEmpty ? "* Required": null,
                       decoration: const InputDecoration(
@@ -59,7 +64,17 @@ class PostList extends StatelessWidget {
                           primary: Colors.green, // background
                           onPrimary: Colors.white, // foreground
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          if(formKey.currentState!.validate()) {
+                            Map<String, String> postParams = new Map();
+                            postParams["title"] = postTitleAddController.text;
+                            postParams["body"] = postBodyController.text;
+                            postParams["userId"] = "1";
+                            APIConsumer.addPost(postParams).then((value) => {
+                              Log.d("$TAG, addPost:: $value")
+                            });
+                          }
+                        },
                         child: Text('Add Post'),
                       ),
                     )
@@ -73,7 +88,7 @@ class PostList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     postNotifier = Provider.of<Post>(context, listen: false);
-    postNotifier!.syncFromNetwork();
+    postNotifier!.getAllPost();
     return Scaffold(
       appBar: AppBar(title: const Text("PostList"), centerTitle: true,),
       body: Container(
