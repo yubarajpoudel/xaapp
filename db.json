@@ -1,0 +1,29 @@
+{
+  "posts": [
+    { "userId": 1,"id": 1, "title": "How To Become a Software-Driven Car", "body": "Global connected software plays a central role in the software-defined vehicle’s architecture, enabling autonomous driving, machine learning, and Mobility-as-a-Service (MaaS) in connected cars. In our eBook “How To Become a Software-Driven Car Manufacturer with an Autonomous Digital Platform”, learn how Cubic Telecom’s software solutions offer a massive opportunity for automakers to create profitable business models through in-car connectivity and accelerate innovation in this complex mobility ecosystem. Download the eBook now." },
+    { "userId": 1,"id": 2, "title": "The 7 Most Essential Winter Car Care Tips", "body": "As residents of the UAE, we're fortunate enough to experience warm weather for the better part of the year. However, the winter chill can sneak up on us if we're not cautious enough.\n\nRelax, relax. This isn't us telling you to stock up on heavy down jackets and winter coats. You don't need all that. What we're getting at is winter car care." },
+    { "userId": 1,"id": 3, "title": "Here's Why You Should Avoid Short Drives", "body": "Dubai's got a rather car-friendly urban planning. From large scale communities, to skyscraper blocks lining highways, there's very little to explore by foot, and just as much to explore by road." },
+    { "userId": 1,"id": 4, "title": "Are short drives bad for your engine?", "body": "Global connected software plays a central role in the software-defined vehicle’s architecture, enabling autonomous driving, machine learning, and Mobility-as-a-Service (MaaS) in connected cars. In our eBook “How To Become a Software-Driven Car Manufacturer with an Autonomous Digital Platform”, learn how Cubic Telecom’s software solutions offer a massive opportunity for automakers to create profitable business models through in-car connectivity and accelerate innovation in this complex mobility ecosystem. Download the eBook now." },
+    { "userId": 1,"id": 5, "title": "How To Become a Software-Driven Car", "body": "Global connected software plays a central role in the software-defined vehicle’s architecture, enabling autonomous driving, machine learning, and Mobility-as-a-Service (MaaS) in connected cars. In our eBook “How To Become a Software-Driven Car Manufacturer with an Autonomous Digital Platform”, learn how Cubic Telecom’s software solutions offer a massive opportunity for automakers to create profitable business models through in-car connectivity." }
+  ],
+  "comments": [
+    { "id": 1, "body": "Its great article", "postId": 1, "name":  "Yubaraj Poudel", "email": "yubarajpoudel123@gmail.com"},
+    { "id": 2, "body": "Wow its great", "postId": 1, "name":  "Yubaraj Poudel", "email": "yubarajpoudel123@gmail.com" },
+    { "id": 3, "body": "Thank you very much for information", "postId": 1, "name":  "Yubaraj Poudel", "email": "yubarajpoudel123@gmail.com" },
+    { "id": 4, "body": "I am disagreed with this", "postId": 2, "name":  "Yubaraj Poudel", "email": "yubarajpoudel123@gmail.com" },
+    { "id": 5, "body": "Very helpful post", "postId": 2 , "name":  "Yubaraj Poudel", "email": "yubarajpoudel123@gmail.com"},
+    { "id": 6, "body": "Give this guy thumbs up", "postId": 2, "name":  "Yubaraj Poudel", "email": "yubarajpoudel123@gmail.com" },
+    { "id": 7, "body": "I don think this is good", "postId": 3, "name":  "Yubaraj Poudel", "email": "yubarajpoudel123@gmail.com" },
+    { "id": 8, "body": "Its great article", "postId": 3, "name":  "Yubaraj Poudel", "email": "yubarajpoudel123@gmail.com" },
+    { "id": 9, "body": "Thank you very much for information", "postId": 3, "name":  "Yubaraj Poudel", "email": "yubarajpoudel123@gmail.com" },
+    { "id": 10, "body": "Liked It", "postId": 4 , "name":  "Yubaraj Poudel", "email": "yubarajpoudel123@gmail.com"},
+    { "id": 11, "body": "Very interesting, Keep on posting like this", "postId": 4 , "name":  "Yubaraj Poudel", "email": "yubarajpoudel123@gmail.com"},
+    { "id": 12, "body": "Very informative, following this", "postId": 4, "name":  "Yubaraj Poudel", "email": "yubarajpoudel123@gmail.com" },
+    { "id": 13, "body": "Liked It", "postId": 5, "name":  "Yubaraj Poudel", "email": "yubarajpoudel123@gmail.com" },
+    { "id": 14, "body": "Very interesting, Keep on posting like this", "postId": 5, "name":  "Yubaraj Poudel", "email": "yubarajpoudel123@gmail.com" },
+    { "id": 15, "body": "Very informative, following this", "postId": 5, "name":  "Yubaraj Poudel", "email": "yubarajpoudel123@gmail.com" }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
