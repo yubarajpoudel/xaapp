@@ -152,10 +152,12 @@ class PostList extends StatelessWidget {
                   child: Text(post.errorMessage ?? "Unknown error"),
                 );
               } else {
-                return ListView.builder(itemBuilder: (context, pos) {
-                  List<Post> postList = post.postList!;
-                  return _postItemView(context, postList[pos]);
-                });
+                return ListView.builder(
+                    itemCount: post.postList!.length,
+                    itemBuilder: (context, pos) {
+                      List<Post> postList = post.postList!;
+                      return _postItemView(context, postList[pos]);
+                    });
               }
             },
           )),

@@ -1,6 +1,6 @@
 class API {
 
-  static const String BASE_URL = "https://jsonplaceholder.typicode.com";
+  static const String BASE_URL = "https://my-json-server.typicode.com/yubarajpoudel/xaapp";
   static const post = "posts";
   static const comment = "comments";
 }

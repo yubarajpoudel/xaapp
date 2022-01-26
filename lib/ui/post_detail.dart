@@ -17,16 +17,16 @@ class PostDetail extends StatelessWidget {
 
   _commentItem(Comment comment) {
     return Card(
-      color: Colors.blueGrey,
+      color: Colors.lightBlue,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
       child: ListTile(
         title: Text(
-          comment.email!,
+          comment.body!,
           style: const TextStyle(color: Colors.white),
         ),
         subtitle: Text(
-          comment.body!,
-          style: const TextStyle(color: Colors.white),
+          comment.email!,
+          style: const TextStyle(color: Colors.white, fontStyle: FontStyle.italic, fontSize: 10),
         ),
       ),
     );
@@ -94,19 +94,28 @@ class PostDetail extends StatelessWidget {
       body: Container(
           padding: const EdgeInsets.all(16.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 post!.title ?? "",
                 style:
                     const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
+              const SizedBox(height: 16,),
               Text(
                 post!.body ?? "",
-                textAlign: TextAlign.left,
               ),
               const SizedBox(
                 height: 8.0,
               ),
+
+              const Text(
+                "Comments",
+                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8.0,),
+
               Expanded(
                 flex: 1,
                 child: Stack(
